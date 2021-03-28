@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   resources :customers
   get 'logout', to: 'sessions#destroy'
   get 'truck_login', to: "sessions#truck_login"
-  post 'login', to: 'sessions#create' 
+  post 'login', to: 'sessions#create'
+  get '/auth/facebook/callback', to: 'sessions#create_via_fb'
 end

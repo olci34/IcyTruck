@@ -5,7 +5,7 @@ ruby '2.6.1'
 
 gem 'pry'
 gem 'bcrypt'
-gem 'omniauth'
+gem 'omniauth', '~> 1.9.1'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

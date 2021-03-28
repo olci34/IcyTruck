@@ -1,6 +1,7 @@
 class TrucksController < ApplicationController
-
+    before_action :truck_owner, only: [:index]
     def new
+        @truck = Truck.new
     end
 
     def create
@@ -21,6 +22,10 @@ class TrucksController < ApplicationController
 
     def truck_params
         params.require(:truck).permit(:name, :email, :password, :zipcode)
+    end
+
+    def truck_owner
+        @truck_owner = Truck.find_by(id: session[:truck_id]).email if session[:truck_id]
     end
 
 end
