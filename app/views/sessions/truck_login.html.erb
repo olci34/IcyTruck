@@ -1,0 +1,9 @@
+<h1>Icecream Truck Log In</h1>
+
+<%= form_tag login_path do %>
+    <%= label_tag "Email: " %>
+    <%= text_field_tag "truck[email]" %><br>
+    <%= label_tag "Password: " %>
+    <%= password_field_tag "truck[password]" %><br>
+    <%= submit_tag "Log In" %>
+<% end %>
