@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_211646) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
+    t.string "email"
     t.string "password_digest"
     t.integer "zipcode"
     t.float "wallet"
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_211646) do
 
   create_table "trucks", force: :cascade do |t|
     t.string "name"
+    t.string "email"
     t.string "password_digest"
     t.integer "zipcode"
     t.boolean "online", default: false
