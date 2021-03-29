@@ -24,9 +24,6 @@ class TrucksController < ApplicationController
         if session[:truck_id]
             @icecream = Icecream.new
             @icecream.flavors.build
-        elsif session[:customer_id]
-            binding.pry
-            @order = current_customer.orders.build
         end
     end
 

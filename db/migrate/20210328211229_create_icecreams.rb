@@ -4,8 +4,6 @@ class CreateIcecreams < ActiveRecord::Migration[6.1]
       t.string :name
       t.float :price
       t.integer :truck_id
-
-      t.timestamps
     end
   end
 end

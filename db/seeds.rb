@@ -5,4 +5,3 @@ icecream = truck.icecreams.create(name: "First Icecream", price: 6.25)
 icecream.flavor_ids = [1,2]
 icecream.save
 customer = Customer.create(name: "Ogulcan S.", email: "customer@email.com", password: "123123", zipcode: 11233)
-order = Order.create(items: "2 First Icecream", truck_id: 1, customer_id: 1)

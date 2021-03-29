@@ -1,0 +1,9 @@
+<h1>Customer Log In</h1>
+
+<%= form_tag login_path do %>
+    <%= label_tag "Email: " %>
+    <%= text_field_tag "customer[email]" %><br>
+    <%= label_tag "Password: "%>
+    <%= text_field_tag "customer[password]" %><br>
+    <%= submit_tag "Log In" %>
+<% end %>

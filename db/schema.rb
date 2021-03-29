@@ -35,8 +35,6 @@ ActiveRecord::Schema.define(version: 2021_03_28_211646) do
     t.string "name"
     t.float "price"
     t.integer "truck_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", force: :cascade do |t|

@@ -6,17 +6,19 @@ Rails.application.routes.draw do
   end
   get 'truck_signup', to: 'trucks#new'
   post 'truck_signup', to: 'trucks#create'
+  get 'truck_login', to: "sessions#truck_login"
+  post 'truck_login', to: 'sessions#create'
 
   resources :icecreams
 
   resources :customers, except: [:new]
   get 'signup', to: 'customers#new'
-  get 'login', to: 'sessions#create'
+  get 'login', to: 'sessions#login'
+  post 'login', to: 'sessions#create'
 
   get 'logout', to: 'sessions#destroy'
   get '/auth/facebook/callback', to: 'sessions#create_via_fb'
-  get 'truck_login', to: "sessions#truck_login"
-  post 'truck_login', to: 'sessions#create'
+  
 
   resources :orders
 

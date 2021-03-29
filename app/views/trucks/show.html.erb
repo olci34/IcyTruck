@@ -30,17 +30,13 @@
 
 <% elsif session[:customer_id] %>
     <h1><%= @truck.name %>'s Menu </h1>
-    <%= form_tag orders_path do %>
-        <ol>
-            <% @truck.icecreams.each do |ic| %>
-                <li>
-                    <%= link_to ic.name, icecream_path(ic) %> - $<%= ic.price %>
-                    <%= number_field_tag :quantity, min: 0 %>
-                </li>
-            <% end %>
-        </ol>
-        <%= submit_tag "Place Order" %>
-    <% end %>
+    <ol>
+        <% @truck.icecreams.each do |ic| %>
+            <li>
+                <%= ic.name %> - $<%= ic.price %>
+            </li>
+        <% end %>
+    </ol>
 <% end %>
 
     
