@@ -17,4 +17,7 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback', to: 'sessions#create_via_fb'
   get 'truck_login', to: "sessions#truck_login"
   post 'truck_login', to: 'sessions#create'
+
+  resources :orders
+
 end

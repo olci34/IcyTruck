@@ -5,7 +5,6 @@ class IcecreamsController < ApplicationController
     end
 
     def create
-        binding.pry
         icecream = Icecream.new(icecream_params)
         icecream.truck = current_truck
         if icecream.save

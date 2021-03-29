@@ -1,28 +1,46 @@
-<h1>Edit <%= @truck.name %>'s Menu </h1>
+<% if session[:truck_id] %>
+    <h1>Edit <%= @truck.name %>'s Menu </h1>
 
-<ol>
-    <% @truck.icecreams.each do |ic| %>
-        <li>
-            <%= link_to ic.name, truck_icecream_path(@truck, ic) %> - $<%= ic.price %>
-            <a href=<%= edit_icecream_path(ic) %>> <button>Edit</button> </a>
-            <%= button_to "Delete",icecream_path(ic), method: :delete %> 
-        </li>
+    <ol>
+        <% @truck.icecreams.each do |ic| %>
+            <li>
+                <%= link_to ic.name, truck_icecream_path(@truck, ic) %> - $<%= ic.price %>
+                <a href=<%= edit_icecream_path(ic) %>> <button>Edit</button> </a>
+                <%= button_to "Delete",icecream_path(ic), method: :delete %> 
+            </li>
+        <% end %>
+    </ol>
+
+    <%= form_for @icecream do |f| %> <!-- BLOG POST -->
+        <%= f.label "Icecream Name: " %>
+        <%= f.text_field :name %><br>
+        <%= f.label "Price" %>
+        <%= f.text_field :price%><br>
+
+        <%= f.collection_check_boxes :flavor_ids, Flavor.all, :id, :name %>
+        <br>
+        
+        <%= f.fields_for :flavors do |flavors_field| %> <!-- BLOG POST -->
+            <%= flavors_field.label "Flavor Name: " %>
+            <%= flavors_field.text_field :name %>
+        <% end %>
+
+        <%= f.submit %>
     <% end %>
-</ol>
 
-<%= form_for @icecream do |f| %> <!-- BLOG POST -->
-    <%= f.label "Icecream Name: " %>
-    <%= f.text_field :name %><br>
-    <%= f.label "Price" %>
-    <%= f.text_field :price%><br>
-
-    <%= f.collection_check_boxes :flavor_ids, Flavor.all, :id, :name %>
-    <br>
-    <%= f.fields_for :flavors do |flavors_field| %> <!-- BLOG POST -->
-        <%= flavors_field.label "Flavor Name: " %>
-        <%= flavors_field.text_field :name %>
+<% elsif session[:customer_id] %>
+    <h1><%= @truck.name %>'s Menu </h1>
+    <%= form_tag orders_path do %>
+        <ol>
+            <% @truck.icecreams.each do |ic| %>
+                <li>
+                    <%= link_to ic.name, icecream_path(ic) %> - $<%= ic.price %>
+                    <%= number_field_tag :quantity, min: 0 %>
+                </li>
+            <% end %>
+        </ol>
+        <%= submit_tag "Place Order" %>
     <% end %>
-
-    <%= f.submit %>
 <% end %>
+
     
