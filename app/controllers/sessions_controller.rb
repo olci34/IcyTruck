@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
             truck = Truck.find_by_email(params[:truck][:email])
             if truck && truck.authenticate(params[:truck][:password])
                 session[:truck_id] = truck.id
+                truck.update(online: true)
                 redirect_to trucks_path
             else
                 redirect_to truck_login_path, alert: "Invalid email or password"
@@ -17,10 +18,11 @@ class SessionsController < ApplicationController
 
     def create_via_fb
         truck = Truck.find_or_create_by(email: request.env['omniauth.auth']['info']['email']) do |t|
-            t.name = " #{request.env['omniauth.auth']['info']['name']}'s Icecream Truck"
+            t.name = "#{request.env['omniauth.auth']['info']['name']}'s Icecream Truck"
             t.password = "password"
         end
         if truck.save
+            truck.update(online: true) if truck.online == false
             session[:truck_id] = truck.id
             redirect_to trucks_path
         else

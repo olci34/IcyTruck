@@ -1,6 +1,6 @@
 class TrucksController < ApplicationController
 
-    before_action :current_truck, only: [:index, :edit, :update, :show]
+    before_action :current_truck, except: [:new, :create]
 
     def new
         @truck = Truck.new
@@ -21,6 +21,8 @@ class TrucksController < ApplicationController
     end
 
     def show
+        @icecream = Icecream.new
+        @icecream.flavors.build
     end
 
     def edit
@@ -29,6 +31,9 @@ class TrucksController < ApplicationController
     def update
         @truck.update(truck_params)
         redirect_to trucks_path
+    end
+
+    def menu_edit
     end
 
     private

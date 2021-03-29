@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :trucks, except: [:new] do 
-    resources :icecreams
+  resources :trucks, except: [:new, :create] do 
+    resources :icecreams, only: [:show]
   end
   get 'truck_signup', to: 'trucks#new'
+  post 'truck_signup', to: 'trucks#create'
 
   resources :icecreams
 
