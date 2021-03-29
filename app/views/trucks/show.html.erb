@@ -1,0 +1,10 @@
+<h1> <%= @truck.name %>'s Menu </h1>
+
+<ol>
+    <% @truck.icecreams.each do |ic| %>
+        <li>
+        <%= link_to ic.name, truck_icecream_path(ic) %> 
+        <a href=<%= edit_truck_icecream_path(ic) %>> <button>Edit</button> </a>
+        </li>
+    <% end %>
+</ol>
