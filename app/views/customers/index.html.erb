@@ -1,2 +1,5 @@
 <h1>Icecream Trucks in your area</h1>
 
+<% @trucks.each do |tr| %>
+    <li><%= link_to tr.name, truck_path(tr) %>, <%= tr.zipcode %> </li>
+<% end %>
