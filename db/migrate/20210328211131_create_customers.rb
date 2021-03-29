@@ -5,7 +5,7 @@ class CreateCustomers < ActiveRecord::Migration[6.1]
       t.string :email
       t.string :password_digest
       t.integer :zipcode
-      t.float :wallet
+      t.float :wallet, default: 0.0
     end
   end
 end

@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_211646) do
     t.string "email"
     t.string "password_digest"
     t.integer "zipcode"
-    t.float "wallet"
+    t.float "wallet", default: 0.0
   end
 
   create_table "flavors", force: :cascade do |t|

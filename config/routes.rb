@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'static#home'
+
   resources :trucks, except: [:new, :create] do ### BLOG POST
     resources :icecreams, only: [:show]
   end
@@ -8,7 +9,10 @@ Rails.application.routes.draw do
 
   resources :icecreams
 
-  resources :customers
+  resources :customers, except: [:new]
+  get 'signup', to: 'customers#new'
+  get 'login', to: 'sessions#create'
+
   get 'logout', to: 'sessions#destroy'
   get '/auth/facebook/callback', to: 'sessions#create_via_fb'
   get 'truck_login', to: "sessions#truck_login"
