@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :trucks, except: [:new, :create] do 
+  root 'static#home'
+  resources :trucks, except: [:new, :create] do ### BLOG POST
     resources :icecreams, only: [:show]
   end
   get 'truck_signup', to: 'trucks#new'

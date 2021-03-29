@@ -10,7 +10,7 @@
     <% end %>
 </ol>
 
-<%= form_for @icecream do |f| %>
+<%= form_for @icecream do |f| %> <!-- BLOG POST -->
     <%= f.label "Icecream Name: " %>
     <%= f.text_field :name %><br>
     <%= f.label "Price" %>
@@ -18,7 +18,7 @@
 
     <%= f.collection_check_boxes :flavor_ids, Flavor.all, :id, :name %>
     <br>
-    <%= f.fields_for :flavors do |flavors_field| %>
+    <%= f.fields_for :flavors do |flavors_field| %> <!-- BLOG POST -->
         <%= flavors_field.label "Flavor Name: " %>
         <%= flavors_field.text_field :name %>
     <% end %>
