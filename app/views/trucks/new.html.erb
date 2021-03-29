@@ -1,19 +1,9 @@
 <h1>Icecream Truck Sign Up</h1>
 
 <div class="new-truck-form">
-    <%= form_tag trucks_path do %>
-        <%= label_tag "Truck Name: " %>
-        <%= text_field_tag "truck[name]" %><br>
-        <%= label_tag "Zipcode: " %>
-        <%= text_field_tag "truck[zipcode]" %><br>
-        <%= label_tag "Email: " %>
-        <%= text_field_tag "truck[email]" %><br>
-        <%= label_tag "Password: " %>
-        <%= password_field_tag "truck[password]" %><br>
-        <%= submit_tag "Sign Up" %>
-    <% end %>
-    
-    <div class="facebook-signup">
+    <%= render 'form' %>
+ </div> 
+
+<div class="facebook-signup">
         <%= link_to "Sign Up via Facebook Account", '/auth/facebook' %>
-    </div>
 </div>

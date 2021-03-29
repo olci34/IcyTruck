@@ -5,7 +5,7 @@ class CreateTrucks < ActiveRecord::Migration[6.1]
       t.string :email
       t.string :password_digest
       t.integer :zipcode
-      t.boolean :online, default: false
+      t.boolean :online, default: true
     end
   end
 end

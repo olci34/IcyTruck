@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_03_28_211646) do
     t.string "email"
     t.string "password_digest"
     t.integer "zipcode"
-    t.boolean "online", default: false
+    t.boolean "online", default: true
   end
 
 end

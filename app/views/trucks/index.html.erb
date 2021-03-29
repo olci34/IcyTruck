@@ -1,8 +1,6 @@
-<h1> Hello, <%= @truck_owner %></h1>
+<h1> Hello, <%= @truck.email %></h1>
 
 <h1>Icecream Trucks</h1>
 <% @trucks.each do |truck| %>
   <li> <%= truck.name %></li>
 <% end %>
-
-<%= link_to "Log Out", logout_path %>

@@ -17,19 +17,23 @@ class SessionsController < ApplicationController
 
     def create_via_fb
         truck = Truck.find_or_create_by(email: request.env['omniauth.auth']['info']['email']) do |t|
+            t.name = " #{request.env['omniauth.auth']['info']['name']}'s Icecream Truck"
             t.password = "password"
         end
         if truck.save
             session[:truck_id] = truck.id
             redirect_to trucks_path
         else
-            redirect_to new_truck_path
+            redirect_to truck_signup_path
         end
     end
 
     def destroy
+        truck = Truck.find_by(id: session[:truck_id]) if session[:truck_id]
+        truck.online = false
+        truck.save
         session.clear
-        redirect_to new_truck_path
+        redirect_to truck_signup_path
     end
 
 end

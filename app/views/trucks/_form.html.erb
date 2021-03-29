@@ -1,0 +1,11 @@
+<%= form_for @truck do |f| %>
+    <%= f.label "Truck Name: " %>
+    <%= f.text_field :name %><br>
+    <%= f.label "Zipcode: " %>
+    <%= f.text_field :zipcode %><br>
+    <%= f.label "Email: " %>
+    <%= f.text_field :email %><br>
+    <%= f.label "Password: " %>
+    <%= f.password_field :password %><br>
+    <%= f.submit %>
+<% end %>

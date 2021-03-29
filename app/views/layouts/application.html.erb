@@ -11,11 +11,24 @@
   </head>
 
   <body>
-  <% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-  <% end %>
+
+    <% flash.each do |type, msg| %>
+      <div class="form-error">
+        <%= msg %>
+      </div>
+    <% end %>
+
+    <div class="nav-bar">
+      <% if session[:truck_id] %>
+        <%= link_to "Settings", edit_truck_path(@truck) %>
+        <%= link_to "Log Out", logout_path %>
+        <%= link_to "My Menu", truck_path(@truck) %>
+      <% else %>
+        <%= link_to "Icecream Truck Sign Up", truck_signup_path %>
+        <%= link_to "Icecream Truck Log In", truck_login_path %>
+      <% end %>
+
     <%= yield %>
+  
   </body>
 </html>
