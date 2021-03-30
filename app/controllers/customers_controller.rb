@@ -24,6 +24,9 @@ class CustomersController < ApplicationController
     def show
     end
 
+    def wallet
+    end
+
 
     private
     
