@@ -33,13 +33,13 @@
 
     <%= form_tag truck_path(@truck.id), method: :get do %>
         <%= collection_select :flavors, :flavor_id, Flavor.all, :id, :name %>
-        <%= submit_tag "Search" %>
+        <%= submit_tag "Flavor Search" %>
     <% end %>
 
     <ol>
         <% @icecreams.each do |ic| %>
             <li>
-                <%= ic.name %> - $<%= ic.price %>
+                <%= link_to ic.name, icecream_path(ic) %> - $<%= ic.price %>
             </li>
         <% end %>
     </ol>

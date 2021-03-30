@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get 'truck_login', to: "sessions#truck_login"
   post 'truck_login', to: 'sessions#create'
 
-  resources :icecreams
+  resources :icecreams do
+    resources :orders
+  end
+
+  post 'ic_order', to: 'icecreams_orders#create'
 
   resources :customers, except: [:new]
   get 'wallet', to: 'customers#wallet'

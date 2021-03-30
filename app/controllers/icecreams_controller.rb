@@ -20,6 +20,9 @@ class IcecreamsController < ApplicationController
     def edit
     end
 
+    def update
+    end
+
     def destroy
         @icecream.delete
         redirect_to truck_path(current_truck)
