@@ -36,9 +36,6 @@ class TrucksController < ApplicationController
         redirect_to trucks_path
     end
 
-    def menu_edit
-    end
-
     private
 
     def truck_params

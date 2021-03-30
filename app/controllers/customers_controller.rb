@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
     end
 
     def index
-        @trucks = Truck.all
+        @trucks = Truck.in_the_area_of(@customer.zipcode)
     end
 
     def show
