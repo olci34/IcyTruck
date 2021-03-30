@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :customers, except: [:new]
   get 'wallet', to: 'customers#wallet'
+  patch 'wallet', to: 'customers#update_wallet'
   get 'signup', to: 'customers#new'
   get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#create'

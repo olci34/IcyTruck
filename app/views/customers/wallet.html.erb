@@ -15,11 +15,12 @@
       </div>
       <div class="modal-body">
         <%= form_for @customer, url: wallet_path do |f| %>
-            Amount: <%= f.number_field :wallet %>
+            Amount: <%= f.number_field :wallet, min: 0 %>
+            <%= f.submit "Add" %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <%= f.submit "Add" %>
+        
       </div>
       <% end %>
 

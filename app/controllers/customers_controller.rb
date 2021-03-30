@@ -27,6 +27,11 @@ class CustomersController < ApplicationController
     def wallet
     end
 
+    def update_wallet
+        @customer.add_money(params[:customer][:wallet])
+        redirect_to wallet_path
+    end
+
 
     private
     
