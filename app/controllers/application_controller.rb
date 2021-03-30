@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     
-    helper_method :current_truck
+    helper_method :current_truck, :current_customer
 
     def current_truck
         if session[:truck_id]

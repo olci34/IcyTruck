@@ -24,6 +24,14 @@ class CustomersController < ApplicationController
     def show
     end
 
+    def edit
+    end
+
+    def update
+        @customer.update(customer_params)
+        redirect_to customers_path
+    end
+
     def wallet
     end
 

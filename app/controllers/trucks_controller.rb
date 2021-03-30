@@ -25,6 +25,11 @@ class TrucksController < ApplicationController
         if session[:truck_id]
             @icecream = Icecream.new
             @icecream.flavors.build
+        elsif session[:customer_id] && params[:flavors]
+            searched_flavor = Flavor.find_by(id: params[:flavors][:flavor_id])
+            @icecreams = @truck.icecreams.select {|ic| ic.flavors.include?(searched_flavor)}
+        elsif session[:customer_id]
+            @icecreams = @truck.icecreams
         end
     end
 

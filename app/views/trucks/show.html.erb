@@ -30,8 +30,14 @@
 
 <% elsif session[:customer_id] %>
     <h1><%= @truck.name %>'s Menu </h1>
+
+    <%= form_tag truck_path(@truck.id), method: :get do %>
+        <%= collection_select :flavors, :flavor_id, Flavor.all, :id, :name %>
+        <%= submit_tag "Search" %>
+    <% end %>
+
     <ol>
-        <% @truck.icecreams.each do |ic| %>
+        <% @icecreams.each do |ic| %>
             <li>
                 <%= ic.name %> - $<%= ic.price %>
             </li>
