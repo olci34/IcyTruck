@@ -1,9 +1,11 @@
 class SessionsController < ApplicationController
 
     def truck_login
+        session[:truck] = "truck"
     end
 
     def login
+        session[:user] = "customer"
     end
 
     def create
@@ -28,16 +30,29 @@ class SessionsController < ApplicationController
     end
 
     def create_via_fb
-        truck = Truck.find_or_create_by(email: request.env['omniauth.auth']['info']['email']) do |t|
-            t.name = "#{request.env['omniauth.auth']['info']['name']}'s Icecream Truck"
-            t.password = "password"
-        end
-        if truck.save
-            truck.update(online: true) if truck.online == false
-            session[:truck_id] = truck.id
-            redirect_to trucks_path
-        else
-            redirect_to truck_signup_path
+        if session[:user] == "truck"
+            truck = Truck.find_or_create_by(email: request.env['omniauth.auth']['info']['email']) do |t|
+                t.name = "#{request.env['omniauth.auth']['info']['name']}'s Icecream Truck"
+                t.password = "password"
+            end
+            if truck.save
+                truck.update(online: true) if truck.online == false
+                session[:truck_id] = truck.id
+                redirect_to trucks_path
+            else
+                redirect_to truck_signup_path
+            end
+        elsif session[:user] == "customer"
+            customer = Customer.find_or_create_by(email: request.env['omniauth.auth']['info']['email']) do |t|
+                t.name = request.env['omniauth.auth']['info']['name']
+                t.password = "password"
+            end
+            if customer.save
+                session[:customer_id] = customer.id
+                redirect_to customers_path
+            else
+                redirect_to signup_path
+            end
         end
     end
 

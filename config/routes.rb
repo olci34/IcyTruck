@@ -18,8 +18,8 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'sessions#destroy'
   get '/auth/facebook/callback', to: 'sessions#create_via_fb'
-  
 
+  
   resources :orders
 
 end

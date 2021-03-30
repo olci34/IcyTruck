@@ -1,6 +1,9 @@
 class CustomersController < ApplicationController
 
+    before_action :current_customer, except: [:new, :create]
+
     def new
+        session[:user] = "customer"
         @customer = Customer.new
     end
 

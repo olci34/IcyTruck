@@ -3,6 +3,7 @@ class TrucksController < ApplicationController
     before_action :current_truck, except: [:new, :create]
 
     def new
+        session[:user] = "truck"
         @truck = Truck.new
     end
 
