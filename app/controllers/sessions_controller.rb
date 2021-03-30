@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
     def truck_login
-        session[:truck] = "truck"
+        session[:user] = "truck"
     end
 
     def login

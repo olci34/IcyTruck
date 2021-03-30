@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     resources :icecreams, only: [:show]
   end
   get 'truck_signup', to: 'trucks#new'
-  post 'truck_signup', to: 'trucks#create'
+  post 'trucks', to: 'trucks#create'
+
   get 'truck_login', to: "sessions#truck_login"
   post 'truck_login', to: 'sessions#create'
 
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy'
   get '/auth/facebook/callback', to: 'sessions#create_via_fb'
 
-  
+
   resources :orders
 
 end
