@@ -45,13 +45,11 @@ ActiveRecord::Schema.define(version: 2021_03_30_192220) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "items"
-    t.integer "total"
+    t.float "total", default: 0.0
     t.boolean "confirmed", default: false
     t.boolean "delivered", default: false
     t.integer "truck_id"
     t.integer "customer_id"
-    t.datetime "time"
   end
 
   create_table "trucks", force: :cascade do |t|

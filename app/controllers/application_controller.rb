@@ -1,12 +1,15 @@
 class ApplicationController < ActionController::Base
     
     helper_method :current_truck, :current_customer
-
     def current_truck
         if session[:truck_id]
             @truck = Truck.find_by(id: session[:truck_id])
-        elsif session[:customer_id]
+        elsif session[:customer_id] && params[:id]
             @truck = Truck.find_by(id: params[:id])
+        elsif session[:customer_id] && params[:truck_id]
+            @truck = Truck.find_by(id: params[:truck_id])
+        elsif session[:customer_id] && params[:order][:truck_id]
+            @truck = Truck.find_by(id: params[:order][:truck_id])
         end
     end
 

@@ -4,7 +4,6 @@ class Customer < ApplicationRecord
     has_secure_password
 
     def add_money(amount)
-        binding.pry
         self.wallet += amount.to_i
         self.save
     end

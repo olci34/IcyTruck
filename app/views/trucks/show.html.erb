@@ -39,10 +39,12 @@
     <ol>
         <% @icecreams.each do |ic| %>
             <li>
-                <%= link_to ic.name, icecream_path(ic) %> - $<%= ic.price %>
+                <%= ic.name %> - $<%= ic.price %>
+                <i><%= ic.flavors.map {|f| f.name}.join(", ") %></i>
             </li>
         <% end %>
     </ol>
+    <%= link_to "Start Order", new_truck_order_path(@truck) %>
 <% end %>
 
     

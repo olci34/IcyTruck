@@ -3,15 +3,3 @@
 <% @icecream.flavors.each do |fl| %>
     <i>| <%= fl.name %> |</i>
 <% end %>
-
-<br><br>
-
-<% if session[:customer_id] %>
-    <%= form_for @order do |f| %>
-        <%= f.fields_for :icecreams_orders do |fields| %>
-            <%= fields.hidden_field @icecream.id %>
-            Quantity: <%= fields.number_field :quantity %>
-        <% end %>
-        <%= f.submit "Add to Cart"%>
-    <% end %>
-<% end %>
