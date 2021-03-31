@@ -7,6 +7,7 @@ class IcecreamsController < ApplicationController
     def create
         icecream = Icecream.new(icecream_params)
         icecream.truck = current_truck
+        binding.pry
         if icecream.save
             redirect_to truck_path(current_truck)
         else
@@ -21,9 +22,9 @@ class IcecreamsController < ApplicationController
     end
 
     def update
-        binding.pry
-        @icecream.update(icecream_params)
-        redirect_to truck_path(current_truck)
+        if @icecream.update(icecream_params)
+            redirect_to truck_path(current_truck)
+        end
     end
 
     def destroy

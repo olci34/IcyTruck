@@ -18,7 +18,7 @@ class TrucksController < ApplicationController
     end
 
     def index
-        @trucks = Truck.where("zipcode == ?", @truck.zipcode)
+        @trucks = Truck.in_the_area_of(@truck.zipcode)
     end
 
     def show ### TODO: Eger logged in yapilmissa, kendi menusu, baska truck menusu ve musteri menusu ayri olmali
