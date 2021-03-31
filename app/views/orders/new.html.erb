@@ -1,16 +1,99 @@
+<style>
+
+    div.menu-form {
+        position: static;
+        width: 50%;
+    }
+
+    div.menu-list {
+        position: static;
+        height: 100%;
+        top: 0px;
+    }
+
+    div.menu-icecreams {
+        position: relative;
+        float: left;
+        left: 0px;
+        top: 0px;
+        width: 50%;
+        font-size: 20px;
+    }
+
+    div.menu-quantities {
+        position: relative;
+        float: left;
+        top: 0px;
+        width: 50%;
+    }
+
+    li {
+        z-index: 4;
+    }
+
+    div.menu-button {
+        position:relative;
+        text-align: center;
+    }
+    table {
+        position: relative;
+        width: 50%;
+    }
+    tr {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    ul {
+        text-align: center;
+    }
+    
+</style>
+
 <h1>New Order</h1>
 
-<%= form_for @order do |f| %>
-    <%= f.hidden_field :truck_id, value: @truck.id %>
-    <%= f.hidden_field :customer_id, value: @customer.id %>
+<div class="menu-headers">
+    <table>
+    <colgroup>
+        <col class="menu-icecream-header">
+        <col class="menu-quantity-header">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Icecreams</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    </table>
+</div>
 
-    <%= f.fields_for :icecreams_orders do |fields| %>
-            <%= fields.hidden_field :icecream_id %>
-            Quantity: <%= fields.number_field :quantity, min: 0%>
-            <br>
-    <% end %>
-    <%= f.submit "Place Order" %>
+<div class="menu-form">
+    <div class="menu-list">
+        <div class="menu-icecreams"> 
+            <ul class="list-group list-group-vertical-sm">
+                <% @truck.icecreams.each do |ic| %>
+                    <li class="list-group-item"><%= ic.name %> - $<%= ic.price %></li>
+                <% end %>
+            </ul>
+        </div>
+        <div class="menu-quantities">
+            <ul class="list-group list-group-vertical-sm">
+                <%= form_for @order do |f| %>
+                    <%= f.hidden_field :truck_id, value: @truck.id %>
+                    <%= f.hidden_field :customer_id, value: @customer.id %>
 
-<% end %>
-    
-    
+                    <%= f.fields_for :icecreams_orders do |fields| %>
+                        <li class="list-group-item">
+                            <%= fields.hidden_field :icecream_id %>
+                            <%= fields.number_field :quantity, min: 0%>
+                        </li>
+                     <% end %>
+                <div class="menu-button"> 
+                    <%= f.submit "Place Order" %>
+                    <% end %>
+                </div> 
+            </ul>
+        </div>
+    </div>   
+</div>
+                    

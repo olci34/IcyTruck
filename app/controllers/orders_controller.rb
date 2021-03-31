@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
         order = Order.new(order_params)
         order.update_total
         if order.save
-            binding.pry
             redirect_to truck_path(@truck), alert: "Order is placed successfully"
         else
             redirect_to truck_path(@truck), alert: "Something went wrong. #{order.errors.full_messages.to_sentence}"

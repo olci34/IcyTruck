@@ -20,8 +20,7 @@ class Order < ApplicationRecord
     end
 
     def order_valid?
-        self.total <= self.customer.wallet
-        self.errors.add(:total, "is higher than your balance")
+        self.total <= self.customer.wallet || self.errors.add(:total, "is higher than your balance")
     end
 
 end
