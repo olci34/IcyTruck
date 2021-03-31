@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2021_03_30_192220) do
     t.boolean "delivered", default: false
     t.integer "truck_id"
     t.integer "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "trucks", force: :cascade do |t|

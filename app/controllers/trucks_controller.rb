@@ -18,10 +18,10 @@ class TrucksController < ApplicationController
     end
 
     def index
-        @trucks = Truck.all
+        @trucks = Truck.where("zipcode == ?", @truck.zipcode)
     end
 
-    def show
+    def show ### TODO: Eger logged in yapilmissa, kendi menusu, baska truck menusu ve musteri menusu ayri olmali
         if session[:truck_id]
             @icecream = Icecream.new
             @icecream.flavors.build

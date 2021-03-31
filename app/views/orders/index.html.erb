@@ -1,6 +1,7 @@
 <h1><%= @truck.name %>'s Incoming Orders</h1>
 
 <% @orders.each do |o| %>
+    Time: <%= o.created_at.strftime("%R") %><br>
     <% o.icecreams_orders.each do |io| %>
         <%= io.icecream.name %> - <%= io.quantity %>
         <br>

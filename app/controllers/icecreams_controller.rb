@@ -21,6 +21,9 @@ class IcecreamsController < ApplicationController
     end
 
     def update
+        binding.pry
+        @icecream.update(icecream_params)
+        redirect_to truck_path(current_truck)
     end
 
     def destroy
