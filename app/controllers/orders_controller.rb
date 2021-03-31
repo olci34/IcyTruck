@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
         @truck.icecreams.each do |i|
             @order.icecreams_orders.build(icecream_id: i.id)
         end
+        session[:picked_truck_id] = @truck.id
     end
     
     def index
@@ -12,7 +13,10 @@ class OrdersController < ApplicationController
 
     def create
         order = Order.new(order_params)
+        order.customer = @customer
+        order.truck = @truck
         order.update_total
+        binding.pry
         if order.save
             redirect_to truck_path(@truck), alert: "Order is placed successfully"
         else

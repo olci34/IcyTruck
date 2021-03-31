@@ -10,13 +10,12 @@ class Order < ApplicationRecord
         attributes.values.each do |attribute|
             icecreams_order = IcecreamsOrder.create(attribute)
             icecreams_order.calculate_total
-            icecreams_order.order = self
-            icecreams_order.save
+            self.icecreams_orders << icecreams_order
         end
     end
 
     def update_total
-        self.total = IcecreamsOrder.where("order_id == ?", self.id).map {|io| io.total }.sum
+        self.total = self.icecreams_orders.map {|io| io.total}.sum
     end
 
     def order_valid?

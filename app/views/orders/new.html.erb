@@ -79,9 +79,6 @@
         <div class="menu-quantities">
             <ul class="list-group list-group-vertical-sm">
                 <%= form_for @order do |f| %>
-                    <%= f.hidden_field :truck_id, value: @truck.id %>
-                    <%= f.hidden_field :customer_id, value: @customer.id %>
-
                     <%= f.fields_for :icecreams_orders do |fields| %>
                         <li class="list-group-item">
                             <%= fields.hidden_field :icecream_id %>

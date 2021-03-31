@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
             @truck = Truck.find_by(id: params[:truck_id])
         elsif session[:customer_id] && params[:order][:truck_id]
             @truck = Truck.find_by(id: params[:order][:truck_id])
+        elsif session[:customer_id] && session[:picked_truck_id]
+            @truck = Truck.find_by(id: session[:picked_truck_id])
         end
     end
 
