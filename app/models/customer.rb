@@ -8,4 +8,9 @@ class Customer < ApplicationRecord
         self.save
     end
 
+    def reduce_money(amount)
+        self.wallet -= amount
+        self.save
+    end
+
 end

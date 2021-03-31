@@ -4,6 +4,7 @@ class Order < ApplicationRecord
     has_many :icecreams,through: :icecreams_orders
     has_many :icecreams_orders
     validate :order_valid?, :order_total_valid?
+    after_save :charge_customer
     # accepts_nested_attributes_for :icecreams_orders
     
     def icecreams_orders_attributes=(attributes)
@@ -14,6 +15,10 @@ class Order < ApplicationRecord
                 self.icecreams_orders << icecreams_order
             end
         end
+    end
+
+    def charge_customer
+        self.customer.reduce_money(self.total)
     end
 
     def update_total
