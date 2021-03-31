@@ -1,6 +1,6 @@
 <h1> Hello, <%= @truck.email %></h1>
 
-<h1>Icecream Trucks in Zipcode: <%=@truck.zipcode%> </h1>
+<h1>Icecream Trucks in Zipcode: <%= @truck.zipcode || (link_to "Update your zipcode", edit_truck_path(@truck)) %> </h1>
 <% @trucks.each do |truck| %>
   <li> <%= link_to truck.name, truck_path(truck) %></li>
 <% end %>

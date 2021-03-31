@@ -1,5 +1,5 @@
 <h1>Welcome <%= @customer.name %></h1>
-<h2>Icecream Trucks in your area</h2>
+<h2>Icecream Trucks in your area: <%= @customer.zipcode || (link_to "Update your zipcode", edit_customer_path(@customer)) %> </h2>
 
 <% @trucks.each do |tr| %>
     <li><%= link_to tr.name, truck_path(tr) %>, <%= tr.zipcode %> </li>

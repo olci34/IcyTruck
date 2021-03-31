@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
         end
     end
 
-    def create_via_fb
+    def create_via_fb ##### TODO clean this method up
         if session[:user] == "truck"
             truck = Truck.find_or_create_by(email: request.env['omniauth.auth']['info']['email']) do |t|
                 t.name = "#{request.env['omniauth.auth']['info']['name']}'s Icecream Truck"
