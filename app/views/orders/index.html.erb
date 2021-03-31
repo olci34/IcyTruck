@@ -1,0 +1,9 @@
+<h1><%= @truck.name %>'s Incoming Orders</h1>
+
+<% @orders.each do |o| %>
+    <% o.icecreams_orders.each do |io| %>
+        <%= io.icecream.name %> - <%= io.quantity %>
+        <br>
+    <% end %>
+    <br> --------------- <br>
+<% end %>

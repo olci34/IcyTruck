@@ -8,9 +8,11 @@ class Order < ApplicationRecord
     
     def icecreams_orders_attributes=(attributes)
         attributes.values.each do |attribute|
-            icecreams_order = IcecreamsOrder.create(attribute)
-            icecreams_order.calculate_total
-            self.icecreams_orders << icecreams_order
+            if !attribute[:quantity].strip.empty? ### had to add it because customer leaves empty quantities in form for
+                icecreams_order = IcecreamsOrder.create(attribute)
+                icecreams_order.calculate_total
+                self.icecreams_orders << icecreams_order
+            end
         end
     end
 

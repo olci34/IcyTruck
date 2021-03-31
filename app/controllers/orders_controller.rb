@@ -9,6 +9,9 @@ class OrdersController < ApplicationController
     end
     
     def index
+        if session[:user] = "truck"
+            @orders = @truck.orders
+        end
     end
 
     def create
@@ -16,7 +19,6 @@ class OrdersController < ApplicationController
         order.customer = @customer
         order.truck = @truck
         order.update_total
-        binding.pry
         if order.save
             redirect_to truck_path(@truck), alert: "Order is placed successfully"
         else
