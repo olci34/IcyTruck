@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-    before_action :current_truck, :current_customer
+    before_action :set_truck, :current_customer
     
     def new
         @order = Order.new

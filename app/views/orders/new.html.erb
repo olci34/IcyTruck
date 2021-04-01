@@ -78,7 +78,7 @@
         </div>
         <div class="menu-quantities">
             <ul class="list-group list-group-vertical-sm">
-                <%= form_for @order do |f| %>
+                <%= form_for @order, url: truck_orders_path(@truck) do |f| %>
                     <%= f.fields_for :icecreams_orders do |fields| %>
                         <li class="list-group-item">
                             <%= fields.hidden_field :icecream_id %>

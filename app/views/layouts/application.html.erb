@@ -24,9 +24,11 @@
     <div class="nav-bar">
       <% if session[:truck_id] %>
         <%= link_to "Settings", edit_truck_path(current_truck) %>
+    <!-- HELPER METHOD -->
         <%= link_to "My Menu", truck_path(current_truck) %>
+        
         <%= link_to "Trucks In The Area", trucks_path %>
-        <%= link_to "Orders", truck_orders_path(current_truck)%>
+        <%= link_to "Orders", truck_orders_path(current_truck) %>
         <%= link_to "Log Out", logout_path %>
       <% elsif session[:customer_id] %>
         <%= link_to "Icecream Trucks", customers_path %>

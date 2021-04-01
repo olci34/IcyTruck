@@ -1,31 +1,18 @@
+Truck Show Page
+
 <% if session[:truck_id] %>
-    <h1>Edit <%= @truck.name %>'s Menu </h1>
+    <h1><%= @truck.name %>'s Menu </h1>
 
     <ol>
         <% @truck.icecreams.each do |ic| %>
             <li>
-                <%= link_to ic.name, truck_icecream_path(@truck, ic) %> - $<%= ic.price %>
-                <a href=<%= edit_icecream_path(ic) %>> <button>Edit</button> </a>
-                <%= button_to "Delete",icecream_path(ic), method: :delete %> 
+                <%= link_to ic.name, truck_icecream_path(ic.truck, ic) %> - $<%= ic.price %>
             </li>
         <% end %>
     </ol>
-
-    <%= form_for @icecream do |f| %> <!-- BLOG POST -->
-        <%= f.label "Icecream Name: " %>
-        <%= f.text_field :name %><br>
-        <%= f.label "Price" %>
-        <%= f.text_field :price%><br>
-
-        <%= f.collection_check_boxes :flavor_ids, Flavor.all, :id, :name %>
-        <br>
-        
-        <%= f.fields_for :flavors do |flavors_field| %> <!-- BLOG POST -->
-            <%= flavors_field.label "Flavor Name: " %>
-            <%= flavors_field.text_field :name %>
-        <% end %>
-
-        <%= f.submit %>
+    
+    <% if session[:truck_id] == params[:id].to_i %>
+        <%= link_to "Add New Icecream", new_truck_icecream_path(@truck) %>
     <% end %>
 
 <% elsif session[:customer_id] %>
@@ -46,5 +33,3 @@
     </ol>
     <%= link_to "Start Order", new_truck_order_path(@truck) %>
 <% end %>
-
-    

@@ -1,17 +1,18 @@
 class IcecreamsController < ApplicationController
     before_action :set_icecream, only: [:show, :edit, :destroy, :update]
+    before_action :set_truck
 
     def new
+        @icecream = Icecream.new
     end
 
     def create
         icecream = Icecream.new(icecream_params)
-        icecream.truck = current_truck
-        binding.pry
+        icecream.truck = @truck
         if icecream.save
-            redirect_to truck_path(current_truck)
+            redirect_to truck_path(@truck)
         else
-            redirect_to truck_path(current_truck), alert: "Invalid input"
+            redirect_to truck_path(@truck), alert: "Invalid input"
         end
     end
     
@@ -28,7 +29,7 @@ class IcecreamsController < ApplicationController
     end
 
     def destroy
-        @icecream.delete
+        @icecream.destroy
         redirect_to truck_path(current_truck)
     end
 

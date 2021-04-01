@@ -24,11 +24,11 @@ class TrucksController < ApplicationController
     def show ### TODO: Eger logged in yapilmissa, kendi menusu, baska truck menusu ve musteri menusu ayri olmali
         if session[:truck_id]
             @icecream = Icecream.new
-            @icecream.flavors.build
         elsif session[:customer_id] && params[:flavors] 
             searched_flavor = Flavor.find_by(id: params[:flavors][:flavor_id])
             @icecreams = @truck.icecreams.select {|ic| ic.flavors.include?(searched_flavor)}
         elsif session[:customer_id]
+            @truck = Truck.find_by(id: params[:id])
             @icecreams = @truck.icecreams
         end
     end
