@@ -2,7 +2,7 @@
     <%= f.label :name %>
     <%= f.text_field :name %><br>
     <%= f.label :zipcode %>
-    <%= f.text_field :zipcode %><br>
+    <%= f.number_field :zipcode, min: 0 %><br>
     <%= f.label :email %>
     <%= f.text_field :email %><br>
     <%= f.label :password %>

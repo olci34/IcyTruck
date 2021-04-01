@@ -1,18 +1,24 @@
 class ApplicationController < ActionController::Base
     
     helper_method :current_truck, :current_customer
+
     def current_truck
-        if session[:truck_id]
-            @truck = Truck.find_by(id: session[:truck_id])
-        elsif session[:customer_id] && params[:id]
-            @truck = Truck.find_by(id: params[:id])
-        elsif session[:customer_id] && params[:truck_id]
-            @truck = Truck.find_by(id: params[:truck_id])
-        elsif session[:customer_id] && params[:order][:truck_id]
-            @truck = Truck.find_by(id: params[:order][:truck_id])
-        elsif session[:customer_id] && session[:picked_truck_id]
-            @truck = Truck.find_by(id: session[:picked_truck_id])
-        end
+        case session[:user]
+        when "truck"
+            if session[:truck_id] == params[:id]                    # to view truck's own menu
+                @truck = Truck.find_by(id: session[:truck_id])
+            else                                                    # to view other truck's menu
+                @truck = Truck.find_by(id: params[:id])
+            end
+        when "customer"
+            if params[:id]                                          # to view truck's menu as a Customer
+                @truck = Truck.find_by(id: params[:id])
+            elsif params[:truck_id]                                 # to view truck's menu in Order page
+                @truck = Truck.find_by(id: params[:truck_id])
+            elsif session[:picked_truck_id]
+                @truck = Truck.find_by(id: session[:picked_truck_id]) # to assign truck_id to new Order
+            end
+        end 
     end
 
     def current_customer

@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
     before_action :current_truck, :current_customer
+    
     def new
         @order = Order.new
         @truck.icecreams.each do |i|

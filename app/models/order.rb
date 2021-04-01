@@ -25,6 +25,8 @@ class Order < ApplicationRecord
         self.total = self.icecreams_orders.map {|io| io.total}.sum
     end
 
+    private
+
     def order_valid?
         self.total <= self.customer.wallet || self.errors.add(:total, "is higher than your balance")
     end
