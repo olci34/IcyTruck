@@ -1,9 +1,5 @@
 <h1>Icecream Truck Sign Up</h1>
 
-<div class="new-truck-form">
-    <%= render 'form' %>
- </div> 
+<%= render 'form' %>
 
-<div class="facebook-signup">
-        <%= link_to "Sign Up via Facebook Account", '/auth/facebook' %>
-</div>
+<%= render partial: 'application/facebook', locals: {task: "Sign Up"} %>

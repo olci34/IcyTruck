@@ -1,5 +1,0 @@
-<h1>Welcome <%= @customer.name %></h1>
-
-<% @trucks.each do |tr| %>
-    <li><%= link_to tr.name, truck_path(tr) %>, <%= tr.zipcode %> </li>
-<% end %>

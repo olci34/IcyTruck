@@ -10,8 +10,10 @@ class OrdersController < ApplicationController
     end
     
     def index
-        if session[:user] = "truck"
+        if session[:user] == "truck"
             @orders = @truck.orders
+        elsif session[:user] == "customer"
+            @orders = @customer.orders
         end
     end
 
@@ -33,7 +35,7 @@ class OrdersController < ApplicationController
     private
 
     def order_params
-        params.require(:order).permit(:truck_id, :customer_id, icecreams_orders_attributes: [:quantity, :icecream_id])
+        params.require(:order).permit(icecreams_orders_attributes: [:quantity, :icecream_id])
     end
 
 end

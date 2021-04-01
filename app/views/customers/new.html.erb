@@ -1,6 +1,5 @@
 <h1>Customer Sign Up</h1>
+
 <%= render 'form' %>
 
-<div class="facebook-signup">
-        <%= link_to "Sign Up via Facebook Account", '/auth/facebook' %>
-</div>
+<%= render partial: 'application/facebook', locals: {task: "Sign Up"} %>

@@ -18,9 +18,17 @@ class Icecream < ApplicationRecord
         end
     end
 
-
     def cancel_orders_upon_delete
-        Order.joins(:icecreams_orders).group("icecream_id = ?", self.id).destroy_all
-        IcecreamsOrder.where("id = ?", self.id).destroy_all
+        Order.joins(:icecreams_orders).where("icecream_id = ?",self.id).destroy_all
+        IcecreamsOrder.where("icecream_id = ?", self.id).destroy_all
+    end
+
+    def self.search_icecreams_by_flavor(flavor_name, truck)
+        flavor = Flavor.where("name = ?", flavor_name).first
+        if flavor_name == "Menu"
+            self.where("truck_id = ?", truck.id)
+        else
+            truck.icecreams.select {|ic| ic.flavor_ids.include?(flavor.id)}
+        end
     end
 end

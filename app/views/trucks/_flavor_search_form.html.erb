@@ -1,0 +1,4 @@
+<%= form_tag truck_path(@truck.id), url: Flavor.find_or_create_by(name: "Menu"), method: :get do %>
+    <%= collection_select :flavors, :flavor_name, Flavor.all, :name, :name %>
+    <%= submit_tag "Flavor Search" %>
+<% end %>

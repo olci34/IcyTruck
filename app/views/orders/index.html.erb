@@ -1,4 +1,9 @@
-<h1><%= @truck.name %>'s Incoming Orders</h1>
+
+<% if session[:truck_id] %>
+    <h1><%= @truck.name %>'s Incoming Orders</h1>
+<% else %>
+    <h1> Your Orders </h1>
+<%end%>
 
 <% @orders.each do |o| %>
     Time: <%= o.created_at.strftime("%R") %><br>

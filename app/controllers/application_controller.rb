@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     
-    helper_method :current_truck, :current_customer
+    helper_method :current_truck, :current_customer, :check_owner?
 
     def current_truck
         @truck = Truck.find_by(id: session[:truck_id])
@@ -29,6 +29,13 @@ class ApplicationController < ActionController::Base
             session[:truck_id]
         when "customer"
             session[:customer_id]
+        end
+    end
+
+    def check_owner?
+        case session[:user]
+        when "truck"
+            params[:truck_id] ? session[:truck_id] == params[:truck_id].to_i : session[:truck_id] == params[:id].to_i
         end
     end
 end

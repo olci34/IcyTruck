@@ -7,7 +7,7 @@
 <% end %>
 <br>
 
-<% if session[:truck_id] == params[:truck_id].to_i %> <!-- HELPER METHOD -->
+<% if check_owner? %>
     <%= button_to "Edit", edit_truck_icecream_path(@truck, @icecream), method: :get %>
     <%= button_to "Delete", truck_icecream_path(@truck, @icecream), method: :delete %>
 <% end %>

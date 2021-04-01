@@ -23,23 +23,11 @@
 
     <div class="nav-bar">
       <% if session[:truck_id] %>
-        <%= link_to "Settings", edit_truck_path(current_truck) %>
-    <!-- HELPER METHOD -->
-        <%= link_to "My Menu", truck_path(current_truck) %>
-        
-        <%= link_to "Trucks In The Area", trucks_path %>
-        <%= link_to "Orders", truck_orders_path(current_truck) %>
-        <%= link_to "Log Out", logout_path %>
+        <%= render 'layouts/truck_layout' %>
       <% elsif session[:customer_id] %>
-        <%= link_to "Icecream Trucks", customers_path %>
-        <%= link_to "My Wallet", wallet_path %>
-        <%= link_to "My Account", edit_customer_path(current_customer)%>
-        <%= link_to "Log Out", logout_path %>
+        <%= render 'layouts/customer_layout' %>
       <% else %>
-        <%= link_to "Icecream Truck Sign Up", truck_signup_path %>
-        <%= link_to "Icecream Truck Log In", truck_login_path %>
-        <%= link_to "Customer Sign Up", signup_path %>
-        <%= link_to "Customer Log In", login_path %>
+        <%= render 'layouts/home_layout' %>
       <% end %>
       
 

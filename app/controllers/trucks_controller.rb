@@ -1,6 +1,6 @@
 class TrucksController < ApplicationController
 
-    before_action :current_truck, except: [:new, :create]
+    before_action :current_truck, except: [:new, :create, :show]
 
     def new
         session[:user] = "truck"
@@ -18,18 +18,20 @@ class TrucksController < ApplicationController
     end
 
     def index
-        @trucks = Truck.in_the_area_of(@truck.zipcode)
+        if session[:user] == "customer"
+            @customer = Customer.find_by(id: params[:customer_id])
+            @trucks = Truck.in_the_area_of(@customer.zipcode)
+        else
+            @trucks = Truck.in_the_area_of(@truck.zipcode)
+        end
     end
 
-    def show ### TODO: Eger logged in yapilmissa, kendi menusu, baska truck menusu ve musteri menusu ayri olmali
-        if session[:truck_id]
-            @icecream = Icecream.new
-        elsif session[:customer_id] && params[:flavors] 
-            searched_flavor = Flavor.find_by(id: params[:flavors][:flavor_id])
-            @icecreams = @truck.icecreams.select {|ic| ic.flavors.include?(searched_flavor)}
-        elsif session[:customer_id]
-            @truck = Truck.find_by(id: params[:id])
-            @icecreams = @truck.icecreams
+    def show
+        @truck = Truck.find_by(id: params[:id])
+        if params[:flavors] # If a flavor is searched
+            @icecreams = Icecream.search_icecreams_by_flavor(params[:flavors][:flavor_name], @truck)
+        else
+            @icecreams = Icecream.where("truck_id = ?", @truck.id)
         end
     end
 

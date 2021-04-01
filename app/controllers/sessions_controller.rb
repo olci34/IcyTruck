@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     end
 
     def create
-        if params[:truck] ### use partial render locals later
+        if params[:truck] ### use partial render locals later like def truck_session, def customer_session
             truck = Truck.find_by_email(params[:truck][:email])
             if truck && truck.authenticate(params[:truck][:password])
                 session[:truck_id] = truck.id
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
             customer = Customer.find_by_email(params[:customer][:email])
             if customer && customer.authenticate(params[:customer][:password])
                 session[:customer_id] = customer.id
-                redirect_to customers_path
+                redirect_to customer_trucks_path(customer)
             else
                 redirect_to login_path, alert: "Invalid customer email or password"
             end
@@ -49,7 +49,7 @@ class SessionsController < ApplicationController
             end
             if customer.save
                 session[:customer_id] = customer.id
-                redirect_to customers_path
+                redirect_to customer_trucks_path(customer)
             else
                 redirect_to signup_path
             end

@@ -1,5 +1,7 @@
-<h1> Hello, <%= @truck.email %></h1>
-
-<% @trucks.each do |truck| %>
-  <li> <%= link_to truck.name, truck_path(truck) %> - <%= truck.zipcode %> </li>
+<% if session[:truck_id] %>
+  <h1> Hello, <%= @truck.name %></h1>
+<% else session[:customer_id] %>
+  <h1>Welcome <%= @customer.name %></h1>
 <% end %>
+
+<%= render @trucks %>
