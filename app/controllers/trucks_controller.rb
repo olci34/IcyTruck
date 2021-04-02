@@ -1,8 +1,10 @@
 class TrucksController < ApplicationController
-
+    before_action :current_customer, only: [:show] # for layout links
     before_action :current_truck, except: [:new, :create, :show]
+    before_action :redirect_if_not_logged_in, only: [:index, :show, :edit]
 
     def new
+        redirect_to trucks_path if logged_in?
         session[:user] = "truck"
         @truck = Truck.new
     end
@@ -19,6 +21,7 @@ class TrucksController < ApplicationController
 
     def index
         if session[:user] == "customer"
+            redirect_to customer_trucks_path(current_customer) if !check_owner?
             @customer = Customer.find_by(id: params[:customer_id])
             @trucks = Truck.in_the_area_of(@customer.zipcode)
         else

@@ -18,8 +18,12 @@ class Icecream < ApplicationRecord
         end
     end
 
-    private
+    def flavors_names
+        Flavor.joins(:flavors_icecreams).where("icecream_id = ?", self.id).map {|fl| fl.name}.join(" / ")
+    end
 
+    private
+    
     def cancel_orders_upon_delete # To make sure to Orders of a deleted icecream
         Order.joins(:icecreams_orders).where("icecream_id = ?",self.id).destroy_all
         IcecreamsOrder.where("icecream_id = ?", self.id).destroy_all

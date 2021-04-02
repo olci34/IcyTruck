@@ -1,9 +1,13 @@
 class IcecreamsController < ApplicationController
     before_action :set_icecream, only: [:show, :edit, :destroy, :update]
+    before_action :current_customer, only: [:show, :edit]
     before_action :set_truck
+    before_action :redirect_if_not_logged_in
 
     def new
+        redirect_to new_truck_icecream_path(current_truck) if !check_owner? # Avoids creating new icecreams for other trucks
         @icecream = Icecream.new
+        @but_not_menu = Flavor.where("name = ?", "Menu")
     end
 
     def create
@@ -20,6 +24,11 @@ class IcecreamsController < ApplicationController
     end
 
     def edit
+        if session[:user] == "truck"
+            redirect_to trucks_path, alert: "Sorry. This icecream is not your truck's." if !check_owner?
+        else session[:user] == "customer"
+            redirect_to customer_trucks_path(@customer), alert: "Only Truck can edit an icecream."
+        end
     end
 
     def update

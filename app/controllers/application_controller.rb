@@ -9,7 +9,11 @@ class ApplicationController < ActionController::Base
     def set_truck
         case session[:user]
         when "truck"
-            @truck = Truck.find_by(id: params[:truck_id])
+            if params[:action] == "index" # Avoiding to see other trucks orders
+                @truck = Truck.find_by(id: session[:truck_id])
+            else
+                @truck = Truck.find_by(id: params[:truck_id])
+            end
         when "customer"
             if params[:truck_id]
                 @truck = Truck.find_by(id: params[:truck_id])
@@ -31,7 +35,7 @@ class ApplicationController < ActionController::Base
             session[:customer_id]
         end
     end
-
+        
     def redirect_if_not_logged_in
         redirect_to root_path, alert: "You must signup or log in" if !logged_in?
     end

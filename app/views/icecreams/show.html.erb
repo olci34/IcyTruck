@@ -1,10 +1,8 @@
 <h1><%= @icecream.name %></h1>
 
-<h4><i>Flavors</i></h4>
+<h4>Flavors</h4>
 
-<% @icecream.flavors.each do |fl| %>
-    <i>| <%= fl.name %> |</i>
-<% end %>
+<i><%= @icecream.flavors_names %></i>
 <br>
 
 <% if check_owner? %>
