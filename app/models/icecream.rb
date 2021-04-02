@@ -18,7 +18,9 @@ class Icecream < ApplicationRecord
         end
     end
 
-    def cancel_orders_upon_delete
+    private
+
+    def cancel_orders_upon_delete # To make sure to Orders of a deleted icecream
         Order.joins(:icecreams_orders).where("icecream_id = ?",self.id).destroy_all
         IcecreamsOrder.where("icecream_id = ?", self.id).destroy_all
     end
@@ -31,4 +33,5 @@ class Icecream < ApplicationRecord
             truck.icecreams.select {|ic| ic.flavor_ids.include?(flavor.id)}
         end
     end
+
 end

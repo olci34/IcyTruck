@@ -13,10 +13,6 @@ Rails.application.routes.draw do
   # New Customer
   get 'signup', to: 'customers#new'
   
-  # Customer Wallet
-  get 'wallet', to: 'customers#wallet'
-  patch 'wallet', to: 'customers#update_wallet'
-  
   # Sessions
   get 'truck_login', to: "sessions#truck_login"
   post 'truck_login', to: 'sessions#create'
@@ -26,6 +22,9 @@ Rails.application.routes.draw do
 
   resources :customers, except: [:new] do
     resources :trucks, only: [:index]
+    # Customer Wallet
+    get 'wallet', to: 'customers#wallet'
+    patch 'wallet', to: 'customers#update_wallet'
   end
 
   resources :orders, only: [:index]

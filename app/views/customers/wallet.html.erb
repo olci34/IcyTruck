@@ -1,4 +1,4 @@
-<h1>My Wallet</h1>
+<h1><%= @customer.name %>'s' Wallet</h1>
 <h3>Balance: <%= @customer.wallet %></h3>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -14,7 +14,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <%= form_for @customer, url: wallet_path do |f| %>
+        <%= form_for @customer, url: customer_wallet_path(@customer) do |f| %>
             Amount: <%= f.number_field :wallet, min: 0 %>
             <%= f.submit "Add" %>
       </div>

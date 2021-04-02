@@ -1,8 +1,10 @@
 class CustomersController < ApplicationController
 
     before_action :current_customer, except: [:new, :create]
+    before_action :redirect_if_not_logged_in, except: [:new, :create]
 
     def new
+        redirect_to customer_trucks_path(current_customer) if logged_in?
         session[:user] = "customer"
         @customer = Customer.new
     end
@@ -11,7 +13,7 @@ class CustomersController < ApplicationController
         customer = Customer.new(customer_params)
         if customer.save
             session[:customer_id] = customer.id
-            redirect_to customers_path
+            redirect_to customer_trucks_path(customer)
         else
             redirect_to signup_path, alert: "Invalid email or password"
         end
@@ -22,24 +24,32 @@ class CustomersController < ApplicationController
     end
 
     def show
+        redirect_to customer_path(@customer) if !check_owner?
     end
 
     def edit
+        redirect_to edit_customer_path(@customer) if !check_owner?
     end
 
     def update
         @customer.update(customer_params)
-        redirect_to customers_path
+        redirect_to customer_trucks_path(@customer)
     end
 
     def wallet
+        redirect_to customer_wallet_path(@customer) if !check_owner?
     end
 
     def update_wallet
         @customer.add_money(params[:customer][:wallet])
-        redirect_to wallet_path
+        redirect_to customer_wallet_path(@customer)
     end
 
+    def destroy
+        @customer.destroy
+        session.clear
+        redirect_to root_path, alert: "Your account has been deleted"
+    end
 
     private
     

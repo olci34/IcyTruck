@@ -32,10 +32,16 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def redirect_if_not_logged_in
+        redirect_to root_path, alert: "You must signup or log in" if !logged_in?
+    end
+
     def check_owner?
         case session[:user]
         when "truck"
             params[:truck_id] ? session[:truck_id] == params[:truck_id].to_i : session[:truck_id] == params[:id].to_i
+        when "customer"
+            params[:customer_id] ? session[:customer_id] == params[:customer_id].to_i : session[:customer_id] == params[:id].to_i
         end
     end
 end
