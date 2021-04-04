@@ -3,6 +3,7 @@ class Customer < ApplicationRecord
     has_many :trucks, through: :orders
     validates :name, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true
+    validates :password, presence: true
     has_secure_password
 
     def add_money(amount)

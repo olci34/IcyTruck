@@ -1,31 +1,22 @@
 class SessionsController < ApplicationController
-
+    
     def truck_login
+        redirect_to trucks_path if logged_in?
         session[:user] = "truck"
+        @errors = []
     end
 
     def login
+        redirect_to customer_trucks_path(current_customer) if logged_in?
         session[:user] = "customer"
+        @errors = []
     end
 
     def create
         if params[:truck] ### use partial render locals later like def truck_session, def customer_session
-            truck = Truck.find_by_email(params[:truck][:email])
-            if truck && truck.authenticate(params[:truck][:password])
-                session[:truck_id] = truck.id
-                truck.update(online: true)
-                redirect_to trucks_path
-            else
-                redirect_to truck_login_path, alert: "Invalid email or password"
-            end
+            truck_authentication
         elsif params[:customer]
-            customer = Customer.find_by_email(params[:customer][:email])
-            if customer && customer.authenticate(params[:customer][:password])
-                session[:customer_id] = customer.id
-                redirect_to customer_trucks_path(customer)
-            else
-                redirect_to login_path, alert: "Invalid customer email or password"
-            end
+            customer_authentication
         end
     end
 
@@ -69,4 +60,34 @@ class SessionsController < ApplicationController
         end
     end
 
+    private
+
+    def truck_authentication
+        @truck = Truck.find_by_email(params[:truck][:email])
+        if @truck && @truck.authenticate(params[:truck][:password])
+            session[:truck_id] = @truck.id
+            @truck.update(online: true)
+            redirect_to trucks_path
+        elsif @truck
+            @errors = ["Invalid Password"]
+            render :truck_login
+        else
+            @errors = ["Invalid Email"]
+            render :truck_login
+        end
+    end
+
+    def customer_authentication
+        @customer = Customer.find_by_email(params[:customer][:email])
+        if @customer && @customer.authenticate(params[:customer][:password])
+            session[:customer_id] = @customer.id
+            redirect_to customer_trucks_path(@customer)
+        elsif @customer
+            @errors = ["Invalid Password"]
+            render :login
+        else
+            @errors = ["Invalid Email"]
+            render :login
+        end
+    end
 end

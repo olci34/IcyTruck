@@ -1,11 +1,12 @@
-<%= form_for @customer do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %><br>
-    <%= f.label :zipcode %>
-    <%= f.number_field :zipcode, min: 0 %><br>
-    <%= f.label :email %>
-    <%= f.text_field :email %><br>
-    <%= f.label :password %>
-    <%= f.password_field :password %><br>
-    <%= f.submit %>
-<% end %>
+<%= render partial: "application/errors", locals: {errors: @customer.errors.full_messages.to_sentence}%>
+<div class="customer-signup">
+    <%= form_for @customer do |f| %>
+        <%= f.label :name %><br>
+        <%= f.text_field :name %> <br>
+        <%= f.label :email %><br>
+        <%= f.text_field :email %><br>
+        <%= f.label :password %><br>
+        <%= f.password_field :password %><br>
+        <%= f.submit %>
+    <% end %>
+</div>

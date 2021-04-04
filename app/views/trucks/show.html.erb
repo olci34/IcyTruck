@@ -2,10 +2,12 @@
 
 <%= render 'flavor_search_form' %>
 
-<%= render @icecreams %>
+<%= render(@icecreams) || "This icecream truck does not have a menu" %>
 
+<div class="menu-button">
 <% if session[:truck_id] %>
-    <%= link_to "Add New Icecream", new_truck_icecream_path(@truck) if check_owner? %>
+    <strong><%= link_to "Add New Icecream", new_truck_icecream_path(@truck) if check_owner? %></strong>
 <% else session[:customer_id] %>
-    <%= link_to "Start Order", new_truck_order_path(@truck) %>
+    <strong><%= link_to "Start Order", new_truck_order_path(@truck) %></strong>
 <% end %>
+</div>

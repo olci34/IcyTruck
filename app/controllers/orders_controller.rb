@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
         if order.save
             redirect_to truck_path(@truck), alert: "Order is placed successfully"
         else
-            redirect_to truck_path(@truck), alert: "Something went wrong. #{order.errors.full_messages.to_sentence}"
+            redirect_to new_truck_order_path(@truck), alert: "Something went wrong. #{order.errors.full_messages.to_sentence}"
         end
     end
 

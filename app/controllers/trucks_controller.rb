@@ -1,7 +1,7 @@
 class TrucksController < ApplicationController
     before_action :current_customer, only: [:show] # for layout links
     before_action :current_truck, except: [:new, :create, :show]
-    before_action :redirect_if_not_logged_in, only: [:index, :show, :edit]
+    before_action :redirect_if_not_logged_in, only: [:index, :show, :edit, :update]
 
     def new
         redirect_to trucks_path if logged_in?
@@ -10,12 +10,12 @@ class TrucksController < ApplicationController
     end
 
     def create
-        truck = Truck.new(truck_params)
-        if truck.save
-            session[:truck_id] = truck.id
+        @truck = Truck.new(truck_params)
+        if @truck.save
+            session[:truck_id] = @truck.id
             redirect_to trucks_path
         else
-            redirect_to truck_signup_path
+            render :new
         end
     end
 

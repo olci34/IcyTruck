@@ -8,14 +8,14 @@ class CustomersController < ApplicationController
         session[:user] = "customer"
         @customer = Customer.new
     end
-
+    
     def create
-        customer = Customer.new(customer_params)
-        if customer.save
-            session[:customer_id] = customer.id
-            redirect_to customer_trucks_path(customer)
+        @customer = Customer.new(customer_params)
+        if @customer.save
+            session[:customer_id] = @customer.id
+            redirect_to customer_trucks_path(@customer)
         else
-            redirect_to signup_path, alert: "Invalid email or password"
+            render :new
         end
     end
 
@@ -32,8 +32,11 @@ class CustomersController < ApplicationController
     end
 
     def update
-        @customer.update(customer_params)
-        redirect_to customer_trucks_path(@customer)
+        if @customer.update(customer_params)
+            redirect_to customer_trucks_path(@customer)
+        else
+            render :edit
+        end
     end
 
     def wallet

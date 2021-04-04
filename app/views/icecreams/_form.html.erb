@@ -1,10 +1,13 @@
+
 <%= form_for @icecream, url: icecream_url(@icecream, @truck) do |f| %> <!-- BLOG POST -->
         <%= f.label "Icecream Name: " %>
         <%= f.text_field :name %><br>
         <%= f.label "Price" %>
         <%= f.text_field :price%><br>
-        <%= f.collection_check_boxes :flavor_ids, Flavor.all - @but_not_menu, :id, :name %>
+        <%= f.collection_check_boxes :flavor_ids, @flavors, :id, :name %>
         <br>
+
+    
         <strong>New Flavor</strong>
         <br>
         <%= f.fields_for :flavors, Flavor.new do |flavors_field| %> <!-- BLOG POST nested attributes -->

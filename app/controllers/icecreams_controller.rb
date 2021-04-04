@@ -7,7 +7,8 @@ class IcecreamsController < ApplicationController
     def new
         redirect_to new_truck_icecream_path(current_truck) if !check_owner? # Avoids creating new icecreams for other trucks
         @icecream = Icecream.new
-        @but_not_menu = Flavor.where("name = ?", "Menu")
+        but_not_menu = Flavor.where("name = ?", "Menu")
+        @flavors = Flavor.all - but_not_menu
     end
 
     def create
@@ -26,6 +27,8 @@ class IcecreamsController < ApplicationController
     def edit
         if session[:user] == "truck"
             redirect_to trucks_path, alert: "Sorry. This icecream is not your truck's." if !check_owner?
+            but_not_menu = Flavor.where("name = ?", "Menu") # To not show Menu as a option in collection box
+            @flavors = Flavor.all - but_not_menu
         else session[:user] == "customer"
             redirect_to customer_trucks_path(@customer), alert: "Only Truck can edit an icecream."
         end

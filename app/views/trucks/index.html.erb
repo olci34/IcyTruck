@@ -1,7 +1,24 @@
 <% if session[:truck_id] %>
   <h1> Hello, <%= @truck.name %></h1>
+  
+  <% if @trucks.empty? %>
+    <p><strong> Please enter your zipcode <strong></p>
+    <%= form_for @truck do |f| %>
+      <%= f.text_field :zipcode, placeholder: "Zipcode" %>
+      <%= f.submit "Update Zipcode" %>
+    <% end %>
+  <% end %>
+
 <% else session[:customer_id] %>
   <h1>Welcome <%= @customer.name %></h1>
+  <% if @trucks.empty? %>
+    <p><strong> Please enter your zipcode <strong></p>
+    <%= form_for @customer do |f| %>
+      <%= f.text_field :zipcode, placeholder: "Zipcode" %>
+      <%= f.submit "Update Zipcode" %>
+    <% end %>
+  <% end %>
 <% end %>
+<h3> Icecream trucks in your area </h3>
 
-<%= render @trucks %>
+<%= render(@trucks) || "There is no trucks in your area" %>

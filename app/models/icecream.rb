@@ -19,7 +19,7 @@ class Icecream < ApplicationRecord
     end
 
     def flavors_names
-        Flavor.joins(:flavors_icecreams).where("icecream_id = ?", self.id).map {|fl| fl.name}.join(" / ")
+        Flavor.joins(:flavors_icecreams).where("icecream_id = ?", self.id).map {|fl| fl.name}.drop(1).join(" / ")
     end
 
     private

@@ -7,5 +7,4 @@ module ApplicationHelper
             truck_icecream_path(truck, icecream)
         end
     end
-
 end

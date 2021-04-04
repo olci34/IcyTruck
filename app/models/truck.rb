@@ -4,6 +4,7 @@ class Truck < ApplicationRecord
     has_many :icecreams
     validates :name, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true
+    validates :password, presence: true
     has_secure_password
 
     scope :in_the_area_of, ->(zipcode) {where('zipcode == ?', zipcode)}
