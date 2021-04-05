@@ -21,14 +21,14 @@ class OrdersController < ApplicationController
     end
 
     def create
-        order = Order.new(order_params)
-        order.customer = @customer # Assigned here instead of exposing in hidden_field
-        order.truck = @truck
-        order.update_total
-        if order.save
+        @order = Order.new(order_params)
+        @order.customer = @customer # Assigned here instead of exposing in hidden_field
+        @order.truck = @truck
+        @order.update_total
+        if @order.save
             redirect_to truck_path(@truck), alert: "Order is placed successfully"
         else
-            redirect_to new_truck_order_path(@truck), alert: "Something went wrong. #{order.errors.full_messages.to_sentence}"
+            render :new
         end
     end
 

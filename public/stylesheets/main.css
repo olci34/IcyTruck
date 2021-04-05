@@ -224,3 +224,34 @@ div.errors {
 div.errors p {
     color: #ef5777;
 }
+
+div.update-zipcode p a {
+    text-decoration: none;
+    font-size: large;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px #cf6a87;
+    transition: all .2s ease-in-out;
+}
+
+div.update-zipcode p a:hover {
+    text-shadow: 1px 1px 2px black, 0 0 25px #303952, 0 0 5px #cf6a87;
+    transform: scale(1.5);
+}
+
+div.flash-error {
+    border: 5px solid #fffa65;
+    backdrop-filter: blur(4px);
+    
+    border-radius: 25px;
+    margin-left: 15%;
+    width: 70%;
+    background-color: rgba(61, 117, 61, 0.315);
+}
+div.flash-error p {
+    
+    text-align: center;
+
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px #cf6a87;
+}

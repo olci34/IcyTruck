@@ -3,23 +3,29 @@ class Icecream < ApplicationRecord
     has_many :icecreams_orders
     has_many :orders, through: :icecreams_orders
     has_and_belongs_to_many :flavors
-    validates :name, uniqueness: { scope: :truck_id, message: "Can't have same name icecreams in your menu"}, presence: true
+    validates :name, uniqueness: { scope: :truck_id, message: "already exists on your menu"}, presence: true
+    validates :price,presence: true
+    validate :flavor_check?
     after_destroy :cancel_orders_upon_delete
     # accepts_nested_attributes_for :flavors
 
     def flavors_attributes=(attributes)
         attributes.values.each do |attribute|
             if !attribute[:name].strip.empty?
-                flavor = Flavor.find_or_create_by(attribute) do |fl|
-                    self.flavors << fl
-                end
+                flavor = Flavor.find_or_create_by(attribute)
+                self.flavors << flavor
+                self.save
             end
-            self.save
+            
         end
     end
 
     def flavors_names
-        Flavor.joins(:flavors_icecreams).where("icecream_id = ?", self.id).map {|fl| fl.name}.drop(1).join(" / ")
+        Flavor.joins(:flavors_icecreams).where("icecream_id = ?", self.id).map {|fl| fl.name}.join(" / ")
+    end
+
+    def flavor_check?
+        self.errors.add(:flavors,"should exist") if self.flavors.empty?
     end
 
     private

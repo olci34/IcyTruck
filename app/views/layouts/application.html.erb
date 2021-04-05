@@ -13,11 +13,13 @@
   </head>
 
   <body>
-    <div class = "flash-error">
+    
       <% flash.each do |type, msg| %>
-          <%= msg %>
+      <div class = "flash-error">
+          <p><%= msg %></p>
+      </div>
     <% end %>
-    </div>
+    
     <nav>
       <div class="nav-bar">
       <% if session[:truck_id] %>

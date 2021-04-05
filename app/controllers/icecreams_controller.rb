@@ -12,12 +12,14 @@ class IcecreamsController < ApplicationController
     end
 
     def create
-        icecream = Icecream.new(icecream_params)
-        icecream.truck = @truck
-        if icecream.save
+        @icecream = Icecream.new(icecream_params)
+        @icecream.truck = @truck
+        if @icecream.save
             redirect_to truck_path(@truck)
         else
-            redirect_to truck_path(@truck), alert: "Invalid input"
+            but_not_menu = Flavor.where("name = ?", "Menu")
+            @flavors = Flavor.all - but_not_menu
+            render :new
         end
     end
     

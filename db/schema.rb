@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_192220) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.integer "zipcode"
+    t.string "zipcode"
     t.float "wallet", default: 0.0
   end
 
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_192220) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.integer "zipcode"
+    t.string "zipcode"
     t.boolean "online", default: true
   end
 
