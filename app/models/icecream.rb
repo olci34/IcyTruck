@@ -7,9 +7,8 @@ class Icecream < ApplicationRecord
     validates :price,presence: true
     validate :flavor_check?
     after_destroy :cancel_orders_upon_delete
-    # accepts_nested_attributes_for :flavors
 
-    def flavors_attributes=(attributes)
+    def flavors_attributes=(attributes) # BLOG POST NESTED ATTRIBUTES
         attributes.values.each do |attribute|
             if !attribute[:name].strip.empty?
                 flavor = Flavor.find_or_create_by(attribute)

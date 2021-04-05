@@ -6,5 +6,7 @@ class Truck < ApplicationRecord
     validates :email, presence: true, uniqueness: true
     has_secure_password
 
-    scope :in_the_area_of, ->(zipcode) {where("zipcode = ?", zipcode)}
+    scope :in_the_area_of, ->(zipcode) {where("zipcode = ?", zipcode)} 
+
+
 end

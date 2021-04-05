@@ -5,7 +5,6 @@ class Order < ApplicationRecord
     has_many :icecreams_orders
     validate :order_valid?, :order_total_valid?
     after_save :charge_customer
-    # accepts_nested_attributes_for :icecreams_orders
     
     def icecreams_orders_attributes=(attributes)
         attributes.values.each do |attribute|
@@ -17,15 +16,15 @@ class Order < ApplicationRecord
         end
     end
 
-    def charge_customer
-        self.customer.reduce_money(self.total)
-    end
-
     def update_total
         self.total = self.icecreams_orders.map {|io| io.total}.sum
     end
 
     private
+
+    def charge_customer
+        self.customer.reduce_money(self.total)
+    end
 
     def order_valid?
         self.total <= self.customer.wallet || self.errors.add(:total, "is higher than your balance")

@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-    
-    helper_method :current_truck, :current_customer, :check_owner?,:error_placeholder
+    helper_method :current_truck, :current_customer, :check_owner?,:error_placeholder  # BLOG POST Helper methods
 
     def current_truck
         @truck = Truck.find_by(id: session[:truck_id])

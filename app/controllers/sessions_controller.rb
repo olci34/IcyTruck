@@ -13,14 +13,14 @@ class SessionsController < ApplicationController
     end
 
     def create
-        if params[:truck] ### use partial render locals later like def truck_session, def customer_session
+        if params[:truck]
             truck_authentication
         elsif params[:customer]
             customer_authentication
         end
     end
 
-    def create_via_fb ##### TODO clean this method up
+    def create_via_fb # Omniauth
         if session[:user] == "truck"
             truck = Truck.find_or_create_by(email: request.env['omniauth.auth']['info']['email']) do |t|
                 t.name = "#{request.env['omniauth.auth']['info']['name']}'s Icecream Truck"

@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
 
-    before_action :current_customer, except: [:new, :create]
+    before_action :current_customer, except: [:new, :create] # BLOG POST callbacks
     before_action :redirect_if_not_logged_in, except: [:new, :create]
 
     def new

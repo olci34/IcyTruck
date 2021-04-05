@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+    
     before_action :set_truck, :current_customer
     before_action :redirect_if_not_logged_in, only: [:new, :index]
     
