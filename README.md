@@ -30,3 +30,4 @@ For customer:
 
 #### Placing Order
 Go to a ice cream truck's menu and click ***Start Order*** 
+![](https://media.giphy.com/media/LmnfydvPZTP7VKiFqz/giphy.gif)
