@@ -14,7 +14,13 @@ For ice cream truck owners:
 ***Settings*** is for updating account infos.  
 ***My Menu*** is to view your own ice creams and add more.  
 ***Trucks In The Area*** is to see trucks in your zip code area.  
-***Orders*** is to see your incoming orders.  
+***Orders*** is to see your incoming orders.
+
+#### Add New Icecream
+Go to ***My Menu***, click ***Add New Icecream***.  
+![](https://media.giphy.com/media/VySS2cEK7xa0ptEtro/giphy.gif)
+
+
 
 For customer:  
 ***My Account*** is for updating account infos.  
@@ -22,3 +28,5 @@ For customer:
 ***My Wallet*** is to view your balance and to add money to your wallet.  
 ***My Orders*** is to see your incoming orders.  
 
+#### Placing Order
+Go to a ice cream truck's menu and click ***Start Order*** 
