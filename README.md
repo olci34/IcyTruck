@@ -10,15 +10,15 @@ Download this repo. Open in your code editor. Run `rails s` . Then visit (http:/
 Sign up as a truck owner or customer. Click "Sign Up via Facebook" to continue with your facebook account. Zipcode is not mandatory but you have to set your zipcode in order to see trucks in your zipcode area.
 
 ### Navigation Bar
-For ice cream truck owners:
-***Settings*** is for updating account infos.
-***My Menu*** is to view your own ice creams and add more.
-***Trucks In The Area*** is to see trucks in your zip code area.
-***Orders*** is to see your incoming orders.
+For ice cream truck owners:  
+***Settings*** is for updating account infos.  
+***My Menu*** is to view your own ice creams and add more.  
+***Trucks In The Area*** is to see trucks in your zip code area.  
+***Orders*** is to see your incoming orders.  
 
-For customer:
-***My Account*** is for updating account infos.
-***Ice Cream Trucks*** is to see trucks in your zip code area.
-***My Wallet*** is to view your balance and to add money to your wallet.
-***My Orders*** is to see your incoming orders.
+For customer:  
+***My Account*** is for updating account infos.  
+***Ice Cream Trucks*** is to see trucks in your zip code area.  
+***My Wallet*** is to view your balance and to add money to your wallet.  
+***My Orders*** is to see your incoming orders.  
 
