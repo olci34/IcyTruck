@@ -24,6 +24,9 @@ class IcecreamsController < ApplicationController
     end
     
     def show
+        if !@icecream
+            redirect_truck_index
+        end
     end
 
     def edit

@@ -31,10 +31,12 @@ class TrucksController < ApplicationController
 
     def show
         @truck = Truck.find_by(id: params[:id])
-        if params[:flavors] # If a flavor is searched
+        if @truck && params[:flavors] # If a flavor is searched
             @icecreams = Icecream.search_icecreams_by_flavor(params[:flavors][:flavor_name], @truck)
-        else
+        elsif @truck
             @icecreams = Icecream.where("truck_id = ?", @truck.id)
+        else
+            redirect_truck_index
         end
     end
 

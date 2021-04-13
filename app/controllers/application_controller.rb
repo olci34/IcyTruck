@@ -46,5 +46,13 @@ class ApplicationController < ActionController::Base
         when "customer"
             params[:customer_id] ? session[:customer_id] == params[:customer_id].to_i : session[:customer_id] == params[:id].to_i
         end
-    end   
+    end
+
+    def redirect_truck_index
+        if current_truck
+            redirect_to trucks_path
+        elsif current_customer
+            redirect_to customer_trucks_path(@customer)
+        end
+    end
 end
