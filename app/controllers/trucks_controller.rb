@@ -44,8 +44,11 @@ class TrucksController < ApplicationController
     end
 
     def update
-        @truck.update(truck_params)
-        redirect_to trucks_path
+        if @truck.update(truck_params)
+            redirect_to trucks_path
+        else
+            render :edit
+        end
     end
 
     private

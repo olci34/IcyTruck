@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-    has_many :orders
+    has_many :orders, -> { order(created_at: :desc)}
     has_many :trucks, through: :orders
     validates :name, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true

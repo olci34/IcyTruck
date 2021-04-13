@@ -1,5 +1,5 @@
 class Truck < ApplicationRecord
-    has_many :orders
+    has_many :orders, -> { order(created_at: :desc)}
     has_many :customers, through: :orders
     has_many :icecreams
     validates :name, presence: true, uniqueness: true
