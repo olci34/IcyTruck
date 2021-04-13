@@ -42,6 +42,10 @@ class IcecreamsController < ApplicationController
     def update
         if @icecream.update(icecream_params)
             redirect_to truck_path(current_truck)
+        else
+            but_not_menu = Flavor.where("name = ?", "Menu")
+            @flavors = Flavor.all - but_not_menu
+            render :edit
         end
     end
 
