@@ -1,6 +1,7 @@
 class TrucksController < ApplicationController
     before_action :current_customer, only: [:show] # for layout links
-    before_action :current_truck, except: [:new, :create, :show]
+    before_action :set_truck, only: [:show]
+    before_action :current_truck, only: [:index, :edit, :update]
     before_action :redirect_if_not_logged_in, only: [:index, :show, :edit, :update]
 
     def new
@@ -30,7 +31,6 @@ class TrucksController < ApplicationController
     end
 
     def show
-        @truck = Truck.find_by(id: params[:id])
         if @truck && params[:flavors] # If a flavor is searched
             @icecreams = Icecream.search_icecreams_by_flavor(params[:flavors][:flavor_name], @truck)
         elsif @truck

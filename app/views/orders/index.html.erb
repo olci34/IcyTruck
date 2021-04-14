@@ -10,7 +10,9 @@
 <% else %>
 <% @orders.each do |o| %>
     <span id="customer-name"><strong>Customer:</strong> <%= o.customer.name %></span>
-    <br>    
+    <br>
+    <span id="customer-name"><strong>Truck:</strong> <%= o.truck.name %></span>
+    <br>
     <span id="order-time"><strong>Time:</strong> <%= o.created_at.strftime("%R") %></span>
     <br>
     <% o.icecreams_orders.each do |io| %>

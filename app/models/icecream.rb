@@ -13,7 +13,6 @@ class Icecream < ApplicationRecord
             if !attribute[:name].strip.empty?
                 flavor = Flavor.find_or_create_by(attribute)
                 self.flavors << flavor
-                self.save
             end
             
         end

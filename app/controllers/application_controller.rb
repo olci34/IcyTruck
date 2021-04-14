@@ -6,19 +6,10 @@ class ApplicationController < ActionController::Base
     end
 
     def set_truck
-        case session[:user]
-        when "truck"
-            if params[:action] == "index" # Avoiding to see other trucks orders
-                @truck = Truck.find_by(id: session[:truck_id])
-            else
-                @truck = Truck.find_by(id: params[:truck_id])
-            end
-        when "customer"
-            if params[:truck_id]
-                @truck = Truck.find_by(id: params[:truck_id])
-            else
-                @truck = Truck.find_by(id: params[:id])
-            end
+        if params[:truck_id] # to create orders
+            @truck = Truck.find_by(id: params[:truck_id])
+        else
+            @truck = Truck.find_by(id: params[:id]) # to show a truck menu when it is clicked
         end
     end
 

@@ -6,16 +6,15 @@ class OrdersController < ApplicationController
     def new
         redirect_to trucks_path, alert: "Only customer accounts can place order." if !current_customer
         @order = Order.new
-        @truck.icecreams.each do |i|
+        @icecreams.each do |i|
             @order.icecreams_orders.build(icecream_id: i.id)
         end
-        session[:picked_truck_id] = @truck.id
     end
     
     def index
         if session[:user] == "truck"
-            redirect_to truck_orders_path(@truck) if !check_owner?
-            @orders = @truck.orders
+            redirect_to truck_orders_path(current_truck) if !check_owner?
+            @orders = current_truck.orders
         elsif session[:user] == "customer"
             @orders = @customer.orders
         end
