@@ -9,6 +9,12 @@
 
 <% else session[:customer_id] %>
   <h1>Welcome <%= @customer.name %></h1>
+
+  <%= form_tag customer_trucks_path(@customer), method: :get do %>
+  <%= number_field_tag "search_zipcode" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
   <div class="update-zipcode">
   <% if @customer.zipcode.nil? %>
     <p> <%= link_to "Update your zipcode", edit_customer_path(@customer) %></p>

@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     def new
         redirect_to trucks_path, alert: "Only customer accounts can place order." if !current_customer
         @order = Order.new
-        @icecreams.each do |i|
+        @truck.icecreams.each do |i|
             @order.icecreams_orders.build(icecream_id: i.id)
         end
     end

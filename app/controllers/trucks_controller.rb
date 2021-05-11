@@ -24,7 +24,11 @@ class TrucksController < ApplicationController
         if session[:user] == "customer"
             redirect_to customer_trucks_path(current_customer) if !check_owner?
             @customer = Customer.find_by(id: params[:customer_id])
-            @trucks = Truck.in_the_area_of(@customer.zipcode)
+            if params[:search_zipcode]
+                @trucks = Truck.in_the_area_of(params[:search_zipcode])
+            else
+                @trucks = Truck.in_the_area_of(@customer.zipcode)
+            end
         else
             @trucks = Truck.in_the_area_of(@truck.zipcode)
         end
